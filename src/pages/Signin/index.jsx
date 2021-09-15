@@ -6,14 +6,22 @@ import "./index.css";
 
 const Signin = () => {
   const history = useHistory();
+  const [error, setError] = useState(false);
   const [member, setMember] = useState({
     name: "",
     type: "",
     id: (Number(members[members.length - 1].id) + 1).toString(),
   });
   const addMember = () => {
-    members.push(member);
-    history.push("/");
+    if (
+      member.type.toLowerCase() === "pf" ||
+      member.type.toLowerCase() === "pj"
+    ) {
+      members.push(member);
+      history.push("/");
+    } else {
+      setError(true);
+    }
   };
 
   return (
@@ -39,6 +47,7 @@ const Signin = () => {
         }
       />
       <button onClick={() => addMember()}>Sign in</button>
+      {error && <span>Tipo errado, informe se é pf ou pj</span>}
       <Link to="/">Voltar</Link>
     </div>
   );
