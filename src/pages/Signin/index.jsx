@@ -1,9 +1,11 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
 import { members } from "../../data/members";
+import { useHistory } from "react-router";
 import "./index.css";
 
 const Signin = () => {
+  const history = useHistory();
   const [member, setMember] = useState({
     name: "",
     type: "",
@@ -11,6 +13,7 @@ const Signin = () => {
   });
   const addMember = () => {
     members.push(member);
+    history.push("/");
   };
 
   return (
